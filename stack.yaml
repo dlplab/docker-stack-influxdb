@@ -41,8 +41,6 @@ services:
       - influxdb2
     volumes:
       - grafana-data:/var/lib/grafana
-      # Optional: auto-provision datasource + basic defaults
-      - ./grafana/provisioning:/etc/grafana/provisioning:ro
     environment:
       # Server / URL correctness (important behind reverse proxy + OIDC redirects)
       GF_SERVER_ROOT_URL: "https://${FQDN_grafana}"
@@ -50,7 +48,7 @@ services:
 
       # Optional: stop Grafana from presenting the local login form
       GF_AUTH_DISABLE_LOGIN_FORM: "true"
-      GF_AUTH_SIGNOUT_REDIRECT_URL: "https://${AUTHENTIK_BASE_URL}/application/o/grafana/end-session/"
+      GF_AUTH_SIGNOUT_REDIRECT_URL: "${GF_AUTH_SIGNOUT_REDIRECT_UR}"
 
       # --- Authentik OIDC (Generic OAuth) ---
       GF_AUTH_GENERIC_OAUTH_ENABLED: "true"

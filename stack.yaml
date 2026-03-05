@@ -1,7 +1,7 @@
 name: influxdb3
 
 networks:
-  influxdb2:
+  influxdb3:
   frontend:
     external: true
     

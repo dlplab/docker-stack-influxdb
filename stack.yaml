@@ -1,6 +1,15 @@
+name: influxdb2
+
+networks:
+  influxdb2:
+  frontend:
+    external: true
+    
 services:
   influxdb2:
+    container_name: influxdb2
     image: influxdb:2
+    networks: ['influxdb2', 'frontend']
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_INIT_USERNAME}

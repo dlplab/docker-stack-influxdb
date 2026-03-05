@@ -8,7 +8,7 @@ networks:
 services:
   influxdb2:
     container_name: influxdb3
-    image: influxdb:3-core
+    image: influxdb:3
     networks: ['influxdb3', 'frontend']
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup

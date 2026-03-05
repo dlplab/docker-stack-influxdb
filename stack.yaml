@@ -1,20 +1,20 @@
 version: '3.9'
 
-name: influxdb3
+name: influxdb2
 
 networks:
-  influxdb3:
+  influxdb2:
   frontend:
     external: true
   
 services:
-  influxdb3:
-    networks: ['influxdb3', 'frontend']
+  influxdb2:
+    networks: ['influxdb2', 'frontend']
     image: influxdb:latest
-    container_name: influxdb3
+    container_name: influxdb2
     volumes:
-      - influxdb3-data:/var/lib/influxdb3
-      - influxdb3-config:/etc/influxdb3
+      - influxdb2-data:/var/lib/influxdb2
+      - influxdb2-config:/etc/influxdb2
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_INIT_USERNAME}
@@ -26,16 +26,16 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=frontend"
-      - "traefik.http.routers.influxdb3-https.tls=true"
-      - "traefik.http.routers.influxdb3-https.tls.certresolver=route53"
-      - "traefik.http.routers.influxdb3-https.rule=Host(`${FQDN}`)"
-      - "traefik.http.routers.influxdb3-https.entrypoints=websecure"
-      - "traefik.http.routers.influxdb3-https.service=influxdb3-svc"
-      - "traefik.http.services.influxdb3-svc.loadbalancer.server.port=8086"
+      - "traefik.http.routers.influxdb2-https.tls=true"
+      - "traefik.http.routers.influxdb2-https.tls.certresolver=route53"
+      - "traefik.http.routers.influxdb2-https.rule=Host(`${FQDN}`)"
+      - "traefik.http.routers.influxdb2-https.entrypoints=websecure"
+      - "traefik.http.routers.influxdb2-https.service=influxdb2-svc"
+      - "traefik.http.services.influxdb2-svc.loadbalancer.server.port=8086"
 
 volumes:
-  influxdb3-data:
-  influxdb3-config:
+  influxdb2-data:
+  influxdb2-config:
     
 
     

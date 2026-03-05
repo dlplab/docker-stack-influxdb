@@ -1,15 +1,20 @@
+version: '3.9'
+
 name: influxdb3
 
 networks:
   influxdb3:
   frontend:
     external: true
-    
+  
 services:
-  influxdb2:
-    container_name: influxdb3
-    image: influxdb:3-core
+  influxdb3:
     networks: ['influxdb3', 'frontend']
+    image: influxdb:latest
+    container_name: influxdb3
+    volumes:
+      - influxdb3-data:/var/lib/influxdb3
+      - influxdb3-config:/etc/influxdb3
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_INIT_USERNAME}
@@ -17,9 +22,7 @@ services:
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_INIT_ADMIN_TOKEN}
       DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_INIT_ORG:-docs}
       DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_INIT_BUCKET:-home}
-    volumes:
-      - influxdb3-data:/var/lib/influxdb3
-      - influxdb3-config:/etc/influxdb3
+
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=frontend"
@@ -33,3 +36,8 @@ services:
 volumes:
   influxdb3-data:
   influxdb3-config:
+    
+
+    
+
+

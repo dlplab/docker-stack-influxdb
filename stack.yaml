@@ -13,6 +13,15 @@ services:
     volumes:
       - influxdb2-data:/var/lib/influxdb2
       - influxdb2-config:/etc/influxdb2
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=frontend"
+      - "traefik.http.routers.influxdb2-https.tls=true"
+      - "traefik.http.routers.influxdb2-https.tls.certresolver=route53"
+      - "traefik.http.routers.influxdb2-https.rule=Host(`${FQDN}`)"
+      - "traefik.http.routers.influxdb2-https.entrypoints=websecure"
+      - "traefik.http.routers.influxdb2-https.service=influxdb2-svc"
+      - "traefik.http.services.influxdb2-svc.loadbalancer.server.port=8086"
 
 volumes:
   influxdb2-data:

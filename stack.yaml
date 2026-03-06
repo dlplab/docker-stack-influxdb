@@ -74,6 +74,7 @@ services:
       # Optional: enforce role mapping (see notes below)
       GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "${GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH}"
       GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "${GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN}"
+      GF_INSTALL_PLUGINS: "volkovlabs-echarts-panel"
 
     labels:
       - "traefik.enable=true"
